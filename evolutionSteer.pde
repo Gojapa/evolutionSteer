@@ -118,14 +118,14 @@ int rInt() {
   return int(random(-0.01, 1.01));
 }
 void drawGround(PGraphics img) {
-  int stairDrawStart = max(1,(int)(-averageY/hazelStairs)-10);
+  int stairDrawStart = max(1, (int)(-averageY/hazelStairs)-10);
   img.noStroke();
-  if (haveGround){
+  if (haveGround) {
     float groundTileSize = 5.0;
     int cx = round(averageX/5);
     int cz = round(averageZ/5);
-    for(int x = cx-5; x < cx+5; x++){
-      for(int z = cz-5; z < cz+5; z++){
+    for (int x = cx-5; x < cx+5; x++) {
+      for (int z = cz-5; z < cz+5; z++) {
         float lowX = (groundTileSize*x)*scaleToFixBug;
         float highX = (groundTileSize*(x+1))*scaleToFixBug;
         float lowZ = (groundTileSize*z)*scaleToFixBug;
@@ -141,71 +141,71 @@ void drawGround(PGraphics img) {
     }
   }
   /*for (int i = 0; i < rects.size(); i++) {
-    Rectangle r = rects.get(i);
-    img.rect(r.x1*scaleToFixBug, r.y1*scaleToFixBug, (r.x2-r.x1)*scaleToFixBug, (r.y2-r.y1)*scaleToFixBug);
-  }
-  if(hazelStairs > 0){
-    for(int i = stairDrawStart; i < stairDrawStart+20; i++){
-      img.fill(255,255,255,128);
-      img.rect((averageX-20)*scaleToFixBug,-hazelStairs*i*scaleToFixBug,40*scaleToFixBug,hazelStairs*0.3*scaleToFixBug);
-      img.fill(255,255,255,255);
-      img.rect((averageX-20)*scaleToFixBug,-hazelStairs*i*scaleToFixBug,40*scaleToFixBug,hazelStairs*0.15*scaleToFixBug);
-    }
-  }*/
+   Rectangle r = rects.get(i);
+   img.rect(r.x1*scaleToFixBug, r.y1*scaleToFixBug, (r.x2-r.x1)*scaleToFixBug, (r.y2-r.y1)*scaleToFixBug);
+   }
+   if(hazelStairs > 0){
+   for(int i = stairDrawStart; i < stairDrawStart+20; i++){
+   img.fill(255,255,255,128);
+   img.rect((averageX-20)*scaleToFixBug,-hazelStairs*i*scaleToFixBug,40*scaleToFixBug,hazelStairs*0.3*scaleToFixBug);
+   img.fill(255,255,255,255);
+   img.rect((averageX-20)*scaleToFixBug,-hazelStairs*i*scaleToFixBug,40*scaleToFixBug,hazelStairs*0.15*scaleToFixBug);
+   }
+   }*/
 }
-float toMuscleUsable(float f){
-  return min(max(f,0.8),1.2);
+float toMuscleUsable(float f) {
+  return min(max(f, 0.8), 1.2);
 }
 void drawPosts(PGraphics img) {
-  int startPostY = min(-8,(int)(averageY/4)*4-4);
+  int startPostY = min(-8, (int)(averageY/4)*4-4);
   img.noStroke();
   img.textAlign(CENTER);
   img.textFont(font, postFontSize*scaleToFixBug); 
   /*for(int postY = startPostY; postY <= startPostY+8; postY += 4){
-    for (int i = (int)(averageX/5-5); i <= (int)(averageX/5+5); i++) {
-      img.fill(255);
-      img.rect((i*5.0-0.1)*scaleToFixBug, (-3.0+postY)*scaleToFixBug, 0.2*scaleToFixBug, 3.0*scaleToFixBug);
-      img.rect((i*5.0-1)*scaleToFixBug, (-3.0+postY)*scaleToFixBug, 2.0*scaleToFixBug, 1.0*scaleToFixBug);
-      img.fill(120);
-      img.textAlign(CENTER);
-      img.text(i+" m", i*5.0*scaleToFixBug, (-2.17+postY)*scaleToFixBug);
-    }
-  }*/
-  img.fill(0,0,255);
+   for (int i = (int)(averageX/5-5); i <= (int)(averageX/5+5); i++) {
+   img.fill(255);
+   img.rect((i*5.0-0.1)*scaleToFixBug, (-3.0+postY)*scaleToFixBug, 0.2*scaleToFixBug, 3.0*scaleToFixBug);
+   img.rect((i*5.0-1)*scaleToFixBug, (-3.0+postY)*scaleToFixBug, 2.0*scaleToFixBug, 1.0*scaleToFixBug);
+   img.fill(120);
+   img.textAlign(CENTER);
+   img.text(i+" m", i*5.0*scaleToFixBug, (-2.17+postY)*scaleToFixBug);
+   }
+   }*/
+  img.fill(0, 0, 255);
   img.beginShape();
   float s = 0.4*scaleToFixBug;
   float y = -0.001*scaleToFixBug;
-  img.vertex(0,y,s);
-  img.vertex(-s,y,0);
-  img.vertex(0,y,-s);
-  img.vertex(s,y,0);
+  img.vertex(0, y, s);
+  img.vertex(-s, y, 0);
+  img.vertex(0, y, -s);
+  img.vertex(s, y, 0);
   img.endShape(CLOSE);
-  
-  colorMode(HSB,1.0);
-  color c = color((timer%40)/40.0,1.0,1.0);
+
+  colorMode(HSB, 1.0);
+  color c = color((timer%40)/40.0, 1.0, 1.0);
   img.fill(c);
   img.noStroke();
   img.lights();
-  
+
   img.pushMatrix();
-  img.translate(foodX*scaleToFixBug,foodY*scaleToFixBug,foodZ*scaleToFixBug);
+  img.translate(foodX*scaleToFixBug, foodY*scaleToFixBug, foodZ*scaleToFixBug);
   img.sphere(0.4*scaleToFixBug*0.5);
   img.popMatrix();
-  
+
   img.noLights();
-  
-  colorMode(RGB,255);
-  img.fill(0,60,0);
+
+  colorMode(RGB, 255);
+  img.fill(0, 60, 0);
   img.pushMatrix();
-  img.translate(foodX*scaleToFixBug,0,foodZ*scaleToFixBug);
-  img.scale(1,0.02,1);
+  img.translate(foodX*scaleToFixBug, 0, foodZ*scaleToFixBug);
+  img.scale(1, 0.02, 1);
   img.sphere(0.4*scaleToFixBug*0.5);
   img.popMatrix();
 }
 void drawArrow(float x, float y, float z, PGraphics img) {
   img.noLights();
   img.pushMatrix();
-  img.translate(x*scaleToFixBug,0,z*scaleToFixBug);
+  img.translate(x*scaleToFixBug, 0, z*scaleToFixBug);
   img.rotateY(camHA);
   img.rotateX(-camVA);
   img.textAlign(CENTER);
@@ -224,9 +224,9 @@ void drawArrow(float x, float y, float z, PGraphics img) {
   img.vertex(-0.5*scaleToFixBug, -2.7*scaleToFixBug);
   img.vertex(0.5*scaleToFixBug, -2.7*scaleToFixBug);
   img.endShape(CLOSE);
-  String fitnessString = nf(getFitness(),0,2)+" "+fitnessUnit;
+  String fitnessString = nf(getFitness(), 0, 2)+" "+fitnessUnit;
   img.fill(255);
-  img.text(fitnessString, 0, -2.91*scaleToFixBug,0.1*scaleToFixBug);
+  img.text(fitnessString, 0, -2.91*scaleToFixBug, 0.1*scaleToFixBug);
   img.popMatrix();
 }
 void drawGraphImage() {
@@ -249,16 +249,15 @@ void drawGraphImage() {
         if (i-1 == topSpeciesCounts.get(genSelected)) {
           stroke(0);
           strokeWeight(2);
-        }
-        else {
+        } else {
           noStroke();
         }
         fill(255, 255, 255);
         rect(lineX+3, y, 56, 14);
-        
+
         fill(0);
         text(toRealSpeciesName(i-1)+": "+c, lineX+58, y+11);
-        
+
         //colorMode(HSB, 1.0);
         //fill(getColor(i-1, true));
         //text("S"+floor((i-1)/10)+""+((i-1)%10)+": "+c, lineX+5, y+11);
@@ -305,7 +304,7 @@ void drawLines(int x, int y, int graphWidth, int graphHeight) {
   graphImage.fill(150);
   graphImage.textFont(font, 18);
   graphImage.textAlign(RIGHT);
-  for (float i = ceil((worst-(best-worst)/18.0)/unit)*unit; i < best+(best-worst)/18.0;i+=unit) {
+  for (float i = ceil((worst-(best-worst)/18.0)/unit)*unit; i < best+(best-worst)/18.0; i+=unit) {
     float lineY = y-i*meterHeight+zero;
     graphImage.line(x, lineY, graphWidth+x, lineY);
     graphImage.text(showUnit(i, unit)+" "+fitnessUnit, x-5, lineY+4);
@@ -315,29 +314,25 @@ void drawLines(int x, int y, int graphWidth, int graphHeight) {
     int k;
     if (i == 28) {
       k = 14;
-    }
-    else if (i < 14) {
+    } else if (i < 14) {
       k = i;
-    }
-    else {
+    } else {
       k = i+1;
     }
     if (k == 14) {
       graphImage.stroke(255, 0, 0, 255);
       graphImage.strokeWeight(5);
-    }
-    else {
+    } else {
       stroke(0);
       if (k == 0 || k == 28 || (k >= 10 && k <= 18)) {
         graphImage.strokeWeight(3);
-      }
-      else {
+      } else {
         graphImage.strokeWeight(1);
       }
     }
     for (int j = 0; j < gen; j++) {
       graphImage.line(x+j*genWidth, (-percentile.get(j)[k])*meterHeight+zero+y, 
-      x+(j+1)*genWidth, (-percentile.get(j+1)[k])*meterHeight+zero+y);
+        x+(j+1)*genWidth, (-percentile.get(j+1)[k])*meterHeight+zero+y);
     }
   }
 }
@@ -390,16 +385,14 @@ float setUnit(float best, float worst) {
 String showUnit(float i, float unit) {
   if (unit < 1) {
     return nf(i, 0, 2)+"";
-  }
-  else {
+  } else {
     return int(i)+"";
   }
 }
 ArrayList<Creature> quickSort(ArrayList<Creature> c) {
   if (c.size() <= 1) {
     return c;
-  }
-  else {
+  } else {
     ArrayList<Creature> less = new ArrayList<Creature>();
     ArrayList<Creature> more = new ArrayList<Creature>();
     ArrayList<Creature> equal = new ArrayList<Creature>();
@@ -409,11 +402,9 @@ ArrayList<Creature> quickSort(ArrayList<Creature> c) {
       Creature ci = c.get(i);
       if (ci.d == c0.d) {
         equal.add(ci);
-      }
-      else if (ci.d < c0.d) {
+      } else if (ci.d < c0.d) {
         less.add(ci);
-      }
-      else {
+      } else {
         more.add(ci);
       }
     }
@@ -511,9 +502,9 @@ void setMenu(int m) {
     drawGraph(975, 570);
   }
 }
-String zeros(int n, int zeros){
+String zeros(int n, int zeros) {
   String s = n+"";
-  for(int i = s.length(); i < zeros; i++){
+  for (int i = s.length(); i < zeros; i++) {
     s = "0"+s;
   }
   return s;
@@ -532,9 +523,9 @@ void mouseReleased() {
   float mY = mouseY/windowSizeMultiplier;
   if (menu == 0 && abs(mX-windowWidth/2) <= 200 && abs(mY-400) <= 100) {
     setMenu(1);
-  }else if (menu == 1 && gen == -1 && abs(mX-120) <= 100 && abs(mY-300) <= 50) {
+  } else if (menu == 1 && gen == -1 && abs(mX-120) <= 100 && abs(mY-300) <= 50) {
     setMenu(2);
-  }else if (menu == 1 && gen >= 0 && abs(mX-990) <= 230) {
+  } else if (menu == 1 && gen >= 0 && abs(mX-990) <= 230) {
     if (abs(mY-40) <= 20) {
       setMenu(4);
       speed = 1;
@@ -556,22 +547,22 @@ void mouseReleased() {
       }
       startASAP();
     }
-  }else if (menu == 3 && abs(mX-1030) <= 130 && abs(mY-684) <= 20) {
+  } else if (menu == 3 && abs(mX-1030) <= 130 && abs(mY-684) <= 20) {
     gen = 0;
     setMenu(1);
   } else if (menu == 7 && abs(mX-1030) <= 130 && abs(mY-684) <= 20) {
     setMenu(8);
-  } else if((menu == 5 || menu == 4) && mY >= windowHeight-40){
-    if(mX < 90){
+  } else if ((menu == 5 || menu == 4) && mY >= windowHeight-40) {
+    if (mX < 90) {
       for (int s = timer; s < 900; s++) {
         simulateCurrentCreature();
       }
       timer = 1021;
-    }else if(mX >= 120 && mX < 360){
+    } else if (mX >= 120 && mX < 360) {
       speed *= 2;
-      if(speed == 1024) speed = 900;
-      if(speed >= 1800) speed = 1;
-    }else if(mX >= windowWidth-120){
+      if (speed == 1024) speed = 900;
+      if (speed >= 1800) speed = 1;
+    } else if (mX >= windowWidth-120) {
       for (int s = timer; s < 900; s++) {
         simulateCurrentCreature();
       }
@@ -587,17 +578,17 @@ void mouseReleased() {
       }
       setMenu(6);
     }
-  } else if(menu == 8 && mX < 90 && mY >= windowHeight-40){
+  } else if (menu == 8 && mX < 90 && mY >= windowHeight-40) {
     timer = 100000;
   } else if (menu == 9 && abs(mX-1030) <= 130 && abs(mY-690) <= 20) {
     setMenu(10);
-  }else if (menu == 11 && abs(mX-1130) <= 80 && abs(mY-690) <= 20) {
+  } else if (menu == 11 && abs(mX-1130) <= 80 && abs(mY-690) <= 20) {
     setMenu(12);
-  }else if (menu == 13 && abs(mX-1130) <= 80 && abs(mY-690) <= 20) {
+  } else if (menu == 13 && abs(mX-1130) <= 80 && abs(mY-690) <= 20) {
     setMenu(1);
   }
 }
-void simulateCurrentCreature(){
+void simulateCurrentCreature() {
   currentCreature.simulate();
   averageNodeNausea = totalNodeNausea/currentCreature.n.size();
   simulationTimer++;
@@ -623,16 +614,16 @@ void drawScreenImage(int stage) {
     if (stage >= 1) y++;
     screenImage.pushMatrix();
     screenImage.translate((x*3+5.5)*scaleToFixBug, (y*2.5+3)*scaleToFixBug, 0);
-    cj.drawCreature(screenImage,true);
+    cj.drawCreature(screenImage, true);
     screenImage.popMatrix();
   }
   timer = 0;
   screenImage.popMatrix();
   screenImage.noLights();
-  
+
   screenImage.pushMatrix();
   screenImage.scale(windowSizeMultiplier); // Arbitrary, do not change.
-  
+
   screenImage.textAlign(CENTER);
   screenImage.textFont(font, 24);
   screenImage.fill(100, 100, 200);
@@ -660,19 +651,19 @@ void drawScreenImage(int stage) {
       int y = floor(j/40)+1;
       if (cj.alive) {
         /*screenImage.pushMatrix();
-        screenImage.scale(10.0*windowSizeMultiplier/scaleToFixBug);
-        
-        screenImage.translate(x*18+500, y*16+200, 570);
-        screenImage.scale(0.13);
-        cj.drawCreature(screenImage,false);
-        screenImage.popMatrix();*/
+         screenImage.scale(10.0*windowSizeMultiplier/scaleToFixBug);
+         
+         screenImage.translate(x*18+500, y*16+200, 570);
+         screenImage.scale(0.13);
+         cj.drawCreature(screenImage,false);
+         screenImage.popMatrix();*/
       } else {
         screenImage.fill(0);
         screenImage.beginShape();
-        screenImage.vertex(x*30+40, y*25+17,0.01);
-        screenImage.vertex(x*30+70, y*25+17,0.01);
-        screenImage.vertex(x*30+70, y*25+42,0.01);
-        screenImage.vertex(x*30+40, y*25+42,0.01);
+        screenImage.vertex(x*30+40, y*25+17, 0.01);
+        screenImage.vertex(x*30+70, y*25+17, 0.01);
+        screenImage.vertex(x*30+70, y*25+42, 0.01);
+        screenImage.vertex(x*30+40, y*25+42, 0.01);
         screenImage.endShape();
       }
     }
@@ -691,16 +682,16 @@ void drawpopUpImage() {
   moveCamera();
   popUpImage.beginDraw();
   popUpImage.smooth();
-  
+
   float camDist = (450/2.0) / tan(PI*30.0 / 180.0);
   popUpImage.pushMatrix();
-  
-  popUpImage.camera(camX/camZoom+camDist*sin(camHA)*cos(camVA),
-  camY/camZoom+camDist*sin(camVA), camZ/camZoom+camDist*cos(camHA)*cos(camVA),
-  camX/camZoom, camY/camZoom, camZ/camZoom, 0, 1, 0);
-  
+
+  popUpImage.camera(camX/camZoom+camDist*sin(camHA)*cos(camVA), 
+    camY/camZoom+camDist*sin(camVA), camZ/camZoom+camDist*cos(camHA)*cos(camVA), 
+    camX/camZoom, camY/camZoom, camZ/camZoom, 0, 1, 0);
+
   popUpImage.scale(1.0/camZoom/scaleToFixBug);
-  
+
   if (simulationTimer < 900) {
     popUpImage.background(120, 200, 255);
   } else {
@@ -708,13 +699,13 @@ void drawpopUpImage() {
   }
   drawPosts(popUpImage);
   drawGround(popUpImage);
-  currentCreature.drawCreature(popUpImage,false);
-  drawArrow(averageX,averageY,averageZ,popUpImage);
+  currentCreature.drawCreature(popUpImage, false);
+  drawArrow(averageX, averageY, averageZ, popUpImage);
   popUpImage.noStroke();
   popUpImage.endDraw();
   popUpImage.popMatrix();
 }
-void moveCamera(){
+void moveCamera() {
   camX += (averageX-camX)*0.2;
   camY += (averageY-camY)*0.2;
   camZ += (averageZ-camZ)*0.2;
@@ -750,8 +741,7 @@ void drawHistogram(int x, int y, int hw, int hh) {
   for (int i = minBar; i <= maxBar; i += 10) {
     if (i == 0) {
       stroke(0, 0, 255);
-    }
-    else {
+    } else {
       stroke(128);
     }
     float theX = x+(i-minBar)*barW;
@@ -763,8 +753,7 @@ void drawHistogram(int x, int y, int hw, int hh) {
     float h = min(barCounts.get(genSelected)[i]*multiplier, hh);
     if (i+minBar == floor(percentile.get(min(genSelected, percentile.size()-1))[14]*histBarsPerMeter)) {
       fill(255, 0, 0);
-    }
-    else {
+    } else {
       fill(0, 0, 0);
     }
     rect(x+i*barW, y+hh-h, barW, h);
@@ -826,19 +815,19 @@ void drawStatusWindow(boolean isFirstFrame) {
     int py2 = py-175;
     if (py >= 360) {
       py2 -= 190;
-    }else {
+    } else {
       py2 += 238;
     }
-    py = min(max(py,0),420);
+    py = min(max(py, 0), 420);
     int px2 = min(max(px-90, 10), 900);
     drawpopUpImage();
     pushMatrix();
-    translate(0,0,1);
+    translate(0, 0, 1);
     image(popUpImage, px2, py2, 360, 360);
     popMatrix();
-    drawBrain(px2-130, py2, 1,5, cj);
+    drawBrain(px2-130, py2, 1, 5, cj);
     drawStats(px2+355, py2+239, 1, 0.45);
-    
+
     simulateCurrentCreature();
     int shouldBeWatching = statusWindow;
     if (statusWindow <= -1) {
@@ -854,19 +843,19 @@ void setup() {
   String[] prePatronData = loadStrings("PatronReport_2017-06-12.csv");
   patronData = new String[PATRON_COUNT];
   int lineAt = 0;
-  for(int i = 0; i < prePatronData.length; i++){
-    if(i != 0 && prePatronData[i].indexOf("Reward") == -1){
+  for (int i = 0; i < prePatronData.length; i++) {
+    if (i != 0 && prePatronData[i].indexOf("Reward") == -1) {
       patronData[lineAt] = prePatronData[i];
       lineAt++;
     }
   }
-  for(int i = 0; i < PATRON_COUNT; i++){
+  for (int i = 0; i < PATRON_COUNT; i++) {
     CREATURES_PER_PATRON[i] = 0;
   }
   frameRate(60);
   randomSeed(SEED);
   noSmooth();
-  size((int)(windowWidth*windowSizeMultiplier), (int)(windowHeight*windowSizeMultiplier),P3D);
+  fullScreen(P3D);
   ellipseMode(CENTER);
   Float[] beginPercentile = new Float[29];
   Integer[] beginBar = new Integer[barLen];
@@ -899,11 +888,11 @@ void setup() {
   popUpImage.smooth();
   popUpImage.background(220);
   popUpImage.endDraw();
-  
+
   font = loadFont("Helvetica-Bold-96.vlw"); 
   textFont(font, 96);
   textAlign(CENTER);
-  
+
   /*rects.add(new Rectangle(4,-7,9,-3));
    rects.add(new Rectangle(6,-1,10,10));
    rects.add(new Rectangle(9.5,-1.5,13,10));
@@ -917,7 +906,7 @@ void setup() {
    rects.add(new Rectangle(33,-5.5,37,10));
    rects.add(new Rectangle(36,-6,40,10));
    rects.add(new Rectangle(39,-6.5,100,10));*/
-   
+
   //rects.add(new Rectangle(-100,-100,100,-2.8));
   //rects.add(new Rectangle(-100,0,100,100));
   //Snaking thing below:
@@ -941,7 +930,7 @@ void draw() {
     fill(0);
     text("EVOLUTION!", windowWidth/2, 200);
     text("START", windowWidth/2, 430);
-  }else if (menu == 1) {
+  } else if (menu == 1) {
     noStroke();
     fill(0);
     background(255, 200, 130);
@@ -970,7 +959,7 @@ void draw() {
       rect(990, 120, 230, 40);
       fill(0);
       //text("Survivor Bias: "+percentify(getSB(genSelected)), 437, 50);
-      text("Curve: ±"+nf(foodAngleChange/(2*PI)*360,0,2)+" degrees", 420, 50);
+      text("Curve: ±"+nf(foodAngleChange/(2*PI)*360, 0, 2)+" degrees", 420, 50);
       text("Do 1 step-by-step generation.", 770, 50);
       text("Do 1 quick generation.", 770, 100);
       text("Do 1 gen ASAP.", 770, 150);
@@ -992,7 +981,7 @@ void draw() {
         startASAP();
       }
     }
-  }else if (menu == 2) {
+  } else if (menu == 2) {
     creatures = 0;
     for (int y = 0; y < 25; y++) {
       for (int x = 0; x < 40; x++) {
@@ -1001,8 +990,8 @@ void draw() {
         ArrayList<Node> n = new ArrayList<Node>(nodeNum);
         ArrayList<Muscle> m = new ArrayList<Muscle>(muscleNum);
         for (int i = 0; i < nodeNum; i++) {
-          n.add(new Node(random(-1, 1), random(-1, 1), random(-1, 1),
-          0, 0, 0, 0.4, random(0, 1))); //replaced all nodes' sizes with 0.4, used to be random(0.1,1), random(0,1)
+          n.add(new Node(random(-1, 1), random(-1, 1), random(-1, 1), 
+            0, 0, 0, 0.4, random(0, 1))); //replaced all nodes' sizes with 0.4, used to be random(0.1,1), random(0,1)
         }
         for (int i = 0; i < muscleNum; i++) {
           int tc1 = 0;
@@ -1021,7 +1010,7 @@ void draw() {
           if (i >= 10) {
             s *= 1.414;
           }
-          float len = random(0.5,1.5);
+          float len = random(0.5, 1.5);
           m.add(new Muscle(tc1, tc2, len, random(0.015, 0.06)));
         }
         float heartbeat = random(40, 80);
@@ -1042,7 +1031,7 @@ void draw() {
       for (int x = 0; x < 40; x++) {
         screenImage.pushMatrix();
         screenImage.translate((x*3+5.5)*scaleToFixBug, (y*2.5+3)*scaleToFixBug, 0);
-        c[y*40+x].drawCreature(screenImage,true);
+        c[y*40+x].drawCreature(screenImage, true);
         screenImage.popMatrix();
       }
     }
@@ -1058,10 +1047,10 @@ void draw() {
     screenImage.text("Back", windowWidth-250, 690);
     screenImage.endDraw();
     setMenu(3);
-  }else if(menu == 3){
-    background(0,0,255);
+  } else if (menu == 3) {
+    background(0, 0, 255);
     image(screenImage, 0, 0, 1280, 720);
-  }else if (menu == 4) {
+  } else if (menu == 4) {
     setGlobalVariables(c[creaturesTested]);
     setMenu(5);
     if (!stepbystepslow) {
@@ -1098,22 +1087,22 @@ void draw() {
       }
       float camDist = (height/2.0) / tan(PI*30.0 / 180.0);
       simulationImage.pushMatrix();
-      simulationImage.camera(camX/camZoom+camDist*sin(camHA)*cos(camVA),
-      camY/camZoom+camDist*sin(camVA), camZ/camZoom+camDist*cos(camHA)*cos(camVA),
-      camX/camZoom, camY/camZoom, camZ/camZoom, 0, 1, 0);
+      simulationImage.camera(camX/camZoom+camDist*sin(camHA)*cos(camVA), 
+        camY/camZoom+camDist*sin(camVA), camZ/camZoom+camDist*cos(camHA)*cos(camVA), 
+        camX/camZoom, camY/camZoom, camZ/camZoom, 0, 1, 0);
 
       simulationImage.scale(1.0/camZoom/scaleToFixBug);
-      
+
       drawPosts(simulationImage);
       drawGround(simulationImage);
-      currentCreature.drawCreature(simulationImage,false);
-      drawArrow(averageX,averageY,averageZ,simulationImage);
+      currentCreature.drawCreature(simulationImage, false);
+      drawArrow(averageX, averageY, averageZ, simulationImage);
       simulationImage.popMatrix();
       simulationImage.endDraw();
-      image(simulationImage,0,0,width/windowSizeMultiplier,
-      height/windowSizeMultiplier);
-      drawBrain(40,20,0,5,currentCreature);
-      drawStats(windowWidth-10,0,0,0.7);
+      image(simulationImage, 0, 0, width/windowSizeMultiplier, 
+        height/windowSizeMultiplier);
+      drawBrain(40, 20, 0, 5, currentCreature);
+      drawStats(windowWidth-10, 0, 0, 0.7);
       drawSkipButton();
       drawOtherButtons();
     }
@@ -1128,7 +1117,7 @@ void draw() {
         textAlign(CENTER);
         textFont(font, 96);
         text("Creature's "+fitnessName+":", windowWidth/2, 300);
-        text(nf(getFitness(),0,2) + " "+fitnessUnit, windowWidth/2, 400);
+        text(nf(getFitness(), 0, 2) + " "+fitnessUnit, windowWidth/2, 400);
       } else {
         timer = 1020;
       }
@@ -1149,7 +1138,7 @@ void draw() {
   if (menu == 6) {
     //sort
     c2 = new ArrayList<Creature>(0);
-    for(int i = 0; i < 1000; i++){
+    for (int i = 0; i < 1000; i++) {
       c2.add(c[i]);
     }
     c2 = quickSort(c2);
@@ -1157,9 +1146,9 @@ void draw() {
     for (int i = 0; i < 29; i++) {
       percentile.get(gen+1)[i] = c2.get(p[i]).d;
     }
-    creatureDatabase.add(c2.get(999).copyCreature(-1,false,false));
-    creatureDatabase.add(c2.get(499).copyCreature(-1,false,false));
-    creatureDatabase.add(c2.get(0).copyCreature(-1,false,false));
+    creatureDatabase.add(c2.get(999).copyCreature(-1, false, false));
+    creatureDatabase.add(c2.get(499).copyCreature(-1, false, false));
+    creatureDatabase.add(c2.get(0).copyCreature(-1, false, false));
 
     Integer[] beginBar = new Integer[barLen];
     for (int i = 0; i < barLen; i++) {
@@ -1217,12 +1206,12 @@ void draw() {
       float x3 = inter(x1, x2, transition);
       float y3 = inter(y1, y2, transition);
       screenImage.translate((x3*3+5.5)*scaleToFixBug, (y3*2.5+4)*scaleToFixBug, 0);
-      cj.drawCreature(screenImage,true);
+      cj.drawCreature(screenImage, true);
     }
     screenImage.popMatrix();
     if (stepbystepslow) {
       timer+=5;
-    }else{
+    } else {
       timer+=20;
     }
     screenImage.endDraw();
@@ -1240,15 +1229,12 @@ void draw() {
     if (abs(mX-639.5) <= 599.5) {
       if (menu == 7 && abs(mY-329) <= 312) {
         statusWindow = creaturesInPosition[floor((mX-40)/30)+floor((mY-17)/25)*40];
-      }
-      else if (menu >= 9 && abs(mY-354) <= 312) {
+      } else if (menu >= 9 && abs(mY-354) <= 312) {
         statusWindow = floor((mX-40)/30)+floor((mY-42)/25)*40;
-      }
-      else {
+      } else {
         statusWindow = -4;
       }
-    }
-    else {
+    } else {
       statusWindow = -4;
     }
   } else if (menu == 1 && genSelected >= 1 && gensToDo == 0 && !drag) {
@@ -1267,12 +1253,12 @@ void draw() {
   if (menu == 10) {
     //Kill!
     for (int j = 0; j < 500; j++) {
-      if(random(0,1) < getSB(gen)){
+      if (random(0, 1) < getSB(gen)) {
         float f = float(j)/1000;
         float rand = (pow(random(-1, 1), 3)+1)/2; //cube function
         slowDies = (f <= rand);
-      }else{
-        slowDies = (random(0,1) < 0.5);
+      } else {
+        slowDies = (random(0, 1) < 0.5);
       }
       int j2;
       int j3;
@@ -1302,13 +1288,13 @@ void draw() {
       if (!c2.get(j).alive) j2 = 999-j;
       Creature cj = c2.get(j2);
       Creature cj2 = c2.get(999-j2);
-      
-      c2.set(j2, cj.copyCreature(cj.id+1000,true,false));        //duplicate
+
+      c2.set(j2, cj.copyCreature(cj.id+1000, true, false));        //duplicate
       c2.set(999-j2, cj.modified(cj2.id+1000));   //mutated offspring 1
     }
     for (int j = 0; j < 1000; j++) {
       Creature cj = c2.get(j);
-      c[cj.id-(gen*1000)-1001] = cj.copyCreature(-1,false,false);
+      c[cj.id-(gen*1000)-1001] = cj.copyCreature(-1, false, false);
     }
     drawScreenImage(3);
     gen++;
@@ -1318,12 +1304,14 @@ void draw() {
       setMenu(1);
     }
   }
-  if(menu%2 == 1 && abs(menu-10) <= 3){
+  if (menu%2 == 1 && abs(menu-10) <= 3) {
     image(screenImage, 0, 0, 1280, 720);
   }
   if (menu == 1 || gensToDo >= 1) {
-    mX = mouseX/windowSizeMultiplier;;
-    mY = mouseY/windowSizeMultiplier;;
+    mX = mouseX/windowSizeMultiplier;
+    ;
+    mY = mouseY/windowSizeMultiplier;
+    ;
     noStroke();
     if (gen >= 1) {
       textAlign(CENTER);
@@ -1355,14 +1343,14 @@ void draw() {
         rect(760+k*160, 180, 140, 140);
         simulationImage.beginDraw();
         simulationImage.pushMatrix();
-        simulationImage.translate(830+160*k, 260,0);
+        simulationImage.translate(830+160*k, 260, 0);
         simulationImage.scale(60.0/scaleToFixBug);
-        creatureDatabase.get((genSelected-1)*3+k).drawCreature(simulationImage,true);
+        creatureDatabase.get((genSelected-1)*3+k).drawCreature(simulationImage, true);
         simulationImage.popMatrix();
         simulationImage.endDraw();
       }
-      image(simulationImage,0,0,width,height);
-      
+      image(simulationImage, 0, 0, width, height);
+
       textAlign(CENTER);
       fill(0);
       textFont(font, 16);
@@ -1392,130 +1380,130 @@ void draw() {
    }*/
   overallTimer++;
 }
-String percentify(float n){
-  return nf(n*100,0,2)+"%";
+String percentify(float n) {
+  return nf(n*100, 0, 2)+"%";
 }
-float getSB(int g){
+float getSB(int g) {
   return 1.0;
   //return 0.7+0.3*cos(g*(2*PI)/50.0);
 }
-void keysToMoveCamera(){
-  if(keyPressed){
-    if(key == 'w'){
+void keysToMoveCamera() {
+  if (keyPressed) {
+    if (key == 'w') {
       camVA -= CAMERA_MOVE_SPEED;
     }
-    if(key == 's'){
+    if (key == 's') {
       camVA += CAMERA_MOVE_SPEED;
     }
-    if(key == 'a'){
+    if (key == 'a') {
       camHA -= CAMERA_MOVE_SPEED;
     }
-    if(key == 'd'){
+    if (key == 'd') {
       camHA += CAMERA_MOVE_SPEED;
     }
     /*if(key == 'i'){
-      for(int i = 2; i < n.size(); i++){
-        n.get(i).vy -= 0.03;
-      }
-    }
-    if(key == 'j'){
-      for(int i = 2; i < n.size(); i++){
-        n.get(i).vx -= 0.03;
-      }
-    }
-    if(key == 'k'){
-      for(int i = 2; i < n.size(); i++){
-        n.get(i).vy += 0.03;
-      }
-    }
-    if(key == 'l'){
-      for(int i = 2; i < n.size(); i++){
-        n.get(i).vx += 0.03;
-      }
-    }*/
+     for(int i = 2; i < n.size(); i++){
+     n.get(i).vy -= 0.03;
+     }
+     }
+     if(key == 'j'){
+     for(int i = 2; i < n.size(); i++){
+     n.get(i).vx -= 0.03;
+     }
+     }
+     if(key == 'k'){
+     for(int i = 2; i < n.size(); i++){
+     n.get(i).vy += 0.03;
+     }
+     }
+     if(key == 'l'){
+     for(int i = 2; i < n.size(); i++){
+     n.get(i).vx += 0.03;
+     }
+     }*/
   }
-  camVA = min(max(camVA,-PI*0.499),-PI*0.001);
+  camVA = min(max(camVA, -PI*0.499), -PI*0.001);
 }
-void keyPressed(){
-  if(key == 't'){
+void keyPressed() {
+  if (key == 't') {
     foodAngleChange += 5.0/360.0*(2*PI);
     setMenu(1);
   }
-  if(key == 'g'){
+  if (key == 'g') {
     foodAngleChange -= 5.0/360.0*(2*PI);
     setMenu(1);
   }
 }
-void drawStats(float x, float y, float z, float size){
+void drawStats(float x, float y, float z, float size) {
   textAlign(RIGHT);
   textFont(font, 32);
   fill(0);
   pushMatrix();
-  translate(x,y,z);
+  translate(x, y, z);
   scale(size);
   text(toRealName(currentCreature.name), 0, 32);
   text("Creature ID: "+currentCreature.id, 0, 64);
-  text("Time: "+nf(timer/60.0,0,2)+" / 15 sec.", 0, 96);
-  text("Playback Speed: x"+max(1,speed), 0, 128);
+  text("Time: "+nf(timer/60.0, 0, 2)+" / 15 sec.", 0, 96);
+  text("Playback Speed: x"+max(1, speed), 0, 128);
   String extraWord = "used";
-  if(energyDirection == -1){
+  if (energyDirection == -1) {
     extraWord = "left";
   }
-  text("X: "+nf(averageX/5.0,0,2)+"", 0, 160);
-  text("Y: "+nf(-averageY/5.0,0,2)+"", 0, 192);
-  text("Z: "+nf(-averageZ/5.0,0,2)+"", 0, 224);
+  text("X: "+nf(averageX/5.0, 0, 2)+"", 0, 160);
+  text("Y: "+nf(-averageY/5.0, 0, 2)+"", 0, 192);
+  text("Z: "+nf(-averageZ/5.0, 0, 2)+"", 0, 224);
   //text("Energy "+extraWord+": "+nf(energy,0,2)+" yums", 0, 256);
   //text("A.N.Nausea: "+nf(averageNodeNausea,0,2)+" blehs", 0, 256);
-  
+
   popMatrix();
 }
-String toRealName(int[] n){
+String toRealName(int[] n) {
   String[] parts = patronData[n[0]].split(",");
-  if(parts[1].length() == 0){
+  if (parts[1].length() == 0) {
     return parts[0]+"'s "+rankify(n[1]+1)+" creature";
-  }else{
+  } else {
     return parts[0]+" "+parts[1]+"'s "+rankify(n[1]+1)+" creature";
   }
 }
-String toRealSpeciesName(int n){
+String toRealSpeciesName(int n) {
   String[] parts = patronData[n].split(",");
-  if(parts[1].length() == 0){
+  if (parts[1].length() == 0) {
     return parts[0];
-  }else{
+  } else {
     return parts[0]+" "+parts[1];
   }
 }
-void drawBrain(float x, float y, float z, float size, Creature c){
+void drawBrain(float x, float y, float z, float size, Creature c) {
   pushMatrix();
-  translate(x,y,z);
+  translate(x, y, z);
   scale(size);
-  currentCreature.brain.drawBrain(size,currentCreature);
+  currentCreature.brain.drawBrain(size, currentCreature);
   popMatrix();
 }
-void drawSkipButton(){
+void drawSkipButton() {
   fill(0);
-  rect(0,windowHeight-40,90,40);
+  rect(0, windowHeight-40, 90, 40);
   fill(255);
   textAlign(CENTER);
   textFont(font, 32);
-  text("SKIP",45,windowHeight-8);
+  text("SKIP", 45, windowHeight-8);
 }
-void drawOtherButtons(){
+void drawOtherButtons() {
   fill(0);
-  rect(120,windowHeight-40,240,40);
+  rect(120, windowHeight-40, 240, 40);
   fill(255);
   textAlign(CENTER);
   textFont(font, 32);
-  text("PB speed: x"+speed,240,windowHeight-8);
+  text("PB speed: x"+speed, 240, windowHeight-8);
   fill(0);
-  rect(windowWidth-120,windowHeight-40,120,40);
+  rect(windowWidth-120, windowHeight-40, 120, 40);
   fill(255);
   textAlign(CENTER);
   textFont(font, 32);
-  text("FINISH",windowWidth-60,windowHeight-8);
+  text("FINISH", windowWidth-60, windowHeight-8);
 }
 void setGlobalVariables(Creature thisCreature) {
-  currentCreature = thisCreature.copyCreature(-1,false,true);
+  currentCreature = thisCreature.copyCreature(-1, false, true);
   timer = 0;
   camZoom = 0.01;
   camX = 0;
@@ -1534,16 +1522,16 @@ void setGlobalVariables(Creature thisCreature) {
   foodZ = 0;
   setFoodLocation();
 }
-void setFoodLocation(){
+void setFoodLocation() {
   setAverages();
   foodAngle += currentCreature.foodPositions[chomps][0];
   float sinA = sin(foodAngle);
   float cosA = cos(foodAngle);
   float furthestNodeForward = 0;
-  for(int i = 0; i < currentCreature.n.size(); i++){
+  for (int i = 0; i < currentCreature.n.size(); i++) {
     Node ni = currentCreature.n.get(i);
     float newX = (ni.x-averageX)*cosA-(ni.z-averageZ)*sinA;
-    if(newX >= furthestNodeForward){
+    if (newX >= furthestNodeForward) {
       furthestNodeForward = newX;
     }
   }
@@ -1553,24 +1541,24 @@ void setFoodLocation(){
   foodY = currentCreature.foodPositions[chomps][1];
   startingFoodDistance = getCurrentFoodDistance();
 }
-float getCurrentFoodDistance(){
+float getCurrentFoodDistance() {
   float closestDist = 9999;
-  for(int i = 0; i < currentCreature.n.size(); i++){
+  for (int i = 0; i < currentCreature.n.size(); i++) {
     Node n = currentCreature.n.get(i);
-    float distFromFood = dist(n.x,n.y,n.z,foodX,foodY,foodZ)-0.4;
-    if(distFromFood < closestDist){
+    float distFromFood = dist(n.x, n.y, n.z, foodX, foodY, foodZ)-0.4;
+    if (distFromFood < closestDist) {
       closestDist = distFromFood;
     }
   }
   return closestDist;
 }
-int[] getNewCreatureName(){
-  float indexOfChoice = random(0,TOTAL_PLEDGED);
+int[] getNewCreatureName() {
+  float indexOfChoice = random(0, TOTAL_PLEDGED);
   float runningTotal = 0;
-  for(int i = 0; i < patronData.length; i++){
+  for (int i = 0; i < patronData.length; i++) {
     String[] parts = patronData[i].split(",");
     runningTotal += Float.parseFloat(parts[3]);
-    if(runningTotal >= indexOfChoice){
+    if (runningTotal >= indexOfChoice) {
       int[] result = new int[2];
       result[0] = i;
       result[1] = CREATURES_PER_PATRON[i];
@@ -1580,33 +1568,33 @@ int[] getNewCreatureName(){
   }
   return null;
 }
-String rankify(int s){
-  if(s >= 11 && s <= 19){
+String rankify(int s) {
+  if (s >= 11 && s <= 19) {
     return s+"th";
-  }else if(s%10 == 1){
+  } else if (s%10 == 1) {
     return s+"st";
-  }else if(s%10 == 2){
+  } else if (s%10 == 2) {
     return s+"nd";
-  }else if(s%10 == 3){
+  } else if (s%10 == 3) {
     return s+"rd";
-  }else{
+  } else {
     return s+"th";
   }
 }
-float getFitness(){
+float getFitness() {
   Boolean hasNodeOffGround = false;
-  for(int i = 0; i < currentCreature.n.size(); i++){
-    if(currentCreature.n.get(i).y <= -0.2001){
+  for (int i = 0; i < currentCreature.n.size(); i++) {
+    if (currentCreature.n.get(i).y <= -0.2001) {
       hasNodeOffGround = true;
     }
   }
-  if(hasNodeOffGround){
-    float withinChomp = max(1.0-getCurrentFoodDistance()/startingFoodDistance,0);
+  if (hasNodeOffGround) {
+    float withinChomp = max(1.0-getCurrentFoodDistance()/startingFoodDistance, 0);
     return chomps+withinChomp;//cumulativeAngularVelocity/(n.size()-2)/pow(averageNodeNausea,0.3);//   /(2*PI)/(n.size()-2); //dist(0,0,averageX,averageZ)*0.2; // Multiply by 0.2 because a meter is 5 units for some weird reason.
-  }else{
+  } else {
     return 0;
   }
 }
-void setFitness(int i){
+void setFitness(int i) {
   c[i].d = getFitness();
 }
